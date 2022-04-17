@@ -25,13 +25,15 @@ namespace HomeWork_Lesson5
             string numbers = Console.ReadLine();
             var numbersRedact = numbers.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
+            string file = "test.bin";
+
             var array = new byte[numbersRedact.Length];
             for (int i = 0; i < array.Length; i++)
             {
 
                 if (!byte.TryParse(numbersRedact[i], out var number))
                 {
-                    Console.WriteLine($"Incorrect number {numbersRedact[i]}");
+                    Console.WriteLine($"Не коректное число: {numbersRedact[i]}");
                     return;
                 }
 
@@ -39,6 +41,11 @@ namespace HomeWork_Lesson5
 
             }
 
+            var bw = new BinaryWriter(File.OpenWrite(file));
+            {
+                bw.Write(array);
+                bw.Flush();
+            }
 
 
         }
